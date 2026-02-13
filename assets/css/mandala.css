@@ -77,6 +77,38 @@ body{
   border-color: rgba(255,94,120,.55);
 }
 
+/* ================= RESULTADO (MANDALA) ================= */
+
+.mandala-resultado{
+  margin-top:32px;
+  display:flex;
+  justify-content:center;
+  padding:10px;
+}
+
+.mandala-caixa-svg{
+  width:100%;
+  max-width:650px; /* controla tamanho máximo */
+  border:1px solid var(--borda);
+  border-radius:20px;
+  background:rgba(0,0,0,.25);
+  padding:24px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:220px;
+  transition: all .3s ease;
+}
+
+.mandala-caixa-svg svg{
+  width:100%;
+  height:auto;
+  max-width:600px; /* limite real da mandala */
+  display:block;
+  border-radius:14px;
+  background:#fff;
+}
+
 /* Layout em 2 colunas */
 .mandala-linha-2{
   display:grid;
@@ -113,25 +145,6 @@ body{
   color:var(--texto-suave);
 }
 
-/* Resultado (SVG) */
-.mandala-resultado{ margin-top:16px; }
-
-.mandala-caixa-svg{
-  border:1px solid var(--borda);
-  border-radius:16px;
-  overflow:hidden;
-  background:rgba(0,0,0,.18);
-  min-height:140px;
-  padding:10px;
-}
-
-.mandala-caixa-svg svg{
-  width:100%;
-  height:auto;
-  display:block;
-  background:#fff;
-  border-radius:12px;
-}
 
 /* Autocomplete */
 .mandala-autocomplete{ position:relative; }
