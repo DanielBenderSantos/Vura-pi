@@ -192,12 +192,24 @@ formulario.addEventListener("submit", async (e) => {
 
     const svgEl = elResultado.querySelector("svg");
     if (svgEl) {
-      svgEl.removeAttribute("width");
-      svgEl.removeAttribute("height");
-      svgEl.setAttribute("preserveAspectRatio", "xMidYMid meet");
-      svgEl.style.width = "100%";
-      svgEl.style.height = "auto";
-    }
+
+  const w = svgEl.getAttribute("width");
+  const h = svgEl.getAttribute("height");
+
+  if (w && h && !svgEl.getAttribute("viewBox")) {
+    svgEl.setAttribute("viewBox", `0 0 ${w} ${h}`);
+  }
+
+  svgEl.removeAttribute("width");
+  svgEl.removeAttribute("height");
+
+  svgEl.setAttribute("preserveAspectRatio", "xMidYMid meet");
+
+  svgEl.style.width = "100%";
+  svgEl.style.height = "auto";
+  svgEl.style.display = "block";
+}
+
 
     ativarZoom();
     ativarDownload();
