@@ -1,7 +1,7 @@
 // app.js
 // GitHub Pages (front) chamando Vercel (backend)
 
-const API_BASE = "https://vura-pi.vercel.app/"; // ✅ sem "/" no final
+const API_BASE = "https://vura-pi.vercel.app"; // ✅ sem "/" no final
 
 const pegarEl = (id) => document.getElementById(id);
 
