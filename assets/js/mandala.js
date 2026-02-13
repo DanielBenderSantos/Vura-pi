@@ -174,7 +174,7 @@ formulario.addEventListener("submit", async (e) => {
     if (!svg) throw new Error("SVG não encontrado na resposta.");
 
     elResultado.innerHTML = `
-      <div id="svgWrapper" style="transition: transform .2s ease;">
+      <div id="svgWrapper">
         ${svg}
       </div>
       <div style="margin-top:16px; text-align:center;">
@@ -192,44 +192,50 @@ formulario.addEventListener("submit", async (e) => {
 
     const svgEl = elResultado.querySelector("svg");
     if (svgEl) {
+      const w = svgEl.getAttribute("width");
+      const h = svgEl.getAttribute("height");
 
-  const w = svgEl.getAttribute("width");
-  const h = svgEl.getAttribute("height");
+      if (w && h && !svgEl.getAttribute("viewBox")) {
+        svgEl.setAttribute("viewBox", `0 0 ${w} ${h}`);
+      }
 
-  if (w && h && !svgEl.getAttribute("viewBox")) {
-    svgEl.setAttribute("viewBox", `0 0 ${w} ${h}`);
-  }
+      svgEl.removeAttribute("width");
+      svgEl.removeAttribute("height");
 
-  svgEl.removeAttribute("width");
-  svgEl.removeAttribute("height");
+      svgEl.setAttribute("preserveAspectRatio", "xMidYMid meet");
 
-  svgEl.setAttribute("preserveAspectRatio", "xMidYMid meet");
-
-  svgEl.style.width = "100%";
-  svgEl.style.height = "auto";
-  svgEl.style.display = "block";
-}
-
+      svgEl.style.width = "100%";
+      svgEl.style.height = "auto";
+      svgEl.style.display = "block";
+    }
 
     ativarZoom();
     ativarDownload();
 
     definirStatus("Pronto ✅");
-
   } catch (erro) {
     definirStatus(erro.message);
   }
 });
 
-// ================= ZOOM =================
-
+// ================= ZOOM (SEM CORTAR) =================
+// Ao invés de transform: scale(), aumentamos a largura real do wrapper.
+// Isso faz o container com overflow:auto criar scroll corretamente.
 function ativarZoom() {
   const wrapper = pegarEl("svgWrapper");
-  if (!wrapper) return;
+  const caixa = elResultado; // #output tem overflow:auto
+  if (!wrapper || !caixa) return;
 
   zoomAtual = 1;
 
-  wrapper.style.transformOrigin = "center center";
+  wrapper.style.width = "100%";
+  wrapper.style.minWidth = "100%";
+
+  // Centraliza após renderizar
+  setTimeout(() => {
+    caixa.scrollLeft = (caixa.scrollWidth - caixa.clientWidth) / 2;
+    caixa.scrollTop  = (caixa.scrollHeight - caixa.clientHeight) / 2;
+  }, 0);
 
   wrapper.addEventListener("wheel", (e) => {
     e.preventDefault();
@@ -237,8 +243,12 @@ function ativarZoom() {
     zoomAtual += e.deltaY * -0.001;
     zoomAtual = Math.min(Math.max(1, zoomAtual), 3);
 
-    wrapper.style.transform = `scale(${zoomAtual})`;
-  });
+    wrapper.style.width = `${zoomAtual * 100}%`;
+
+    // Mantém centralizado (opcional, mas fica bom)
+    caixa.scrollLeft = (caixa.scrollWidth - caixa.clientWidth) / 2;
+    caixa.scrollTop  = (caixa.scrollHeight - caixa.clientHeight) / 2;
+  }, { passive: false });
 }
 
 // ================= DOWNLOAD PNG =================

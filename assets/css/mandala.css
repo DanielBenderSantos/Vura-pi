@@ -10,8 +10,8 @@
   --grad-2:#ffa58d;
 }
 
-*{ 
-  box-sizing:border-box; 
+*{
+  box-sizing:border-box;
 }
 
 body{
@@ -32,18 +32,18 @@ body{
 }
 
 /* Cabeçalho */
-.mandala-cabecalho{ 
-  margin-bottom:14px; 
+.mandala-cabecalho{
+  margin-bottom:14px;
 }
 
-.mandala-titulo{ 
-  margin:0; 
-  font-size:32px; 
+.mandala-titulo{
+  margin:0;
+  font-size:32px;
 }
 
-.mandala-subtitulo{ 
-  margin:6px 0 0; 
-  color:var(--texto-suave); 
+.mandala-subtitulo{
+  margin:6px 0 0;
+  color:var(--texto-suave);
 }
 
 /* Cartão */
@@ -110,9 +110,18 @@ body{
   justify-content:center;
   align-items:center;
 
-  overflow:auto; /* 🔥 ESSA LINHA RESOLVE O CORTE NO ZOOM */
+  overflow:auto; /* scroll real */
+  -webkit-overflow-scrolling: touch;
 }
 
+/* Wrapper cresce de verdade (zoom via width) */
+#svgWrapper{
+  display:inline-block;
+  min-width:100%;
+  width:100%;
+}
+
+/* O SVG se adapta ao wrapper */
 .mandala-caixa-svg svg{
   width:100%;
   height:auto;
@@ -130,8 +139,8 @@ body{
 }
 
 @media (max-width:720px){
-  .mandala-linha-2{ 
-    grid-template-columns:1fr; 
+  .mandala-linha-2{
+    grid-template-columns:1fr;
   }
 }
 
@@ -150,12 +159,12 @@ body{
   transition: transform .06s ease, filter .15s ease;
 }
 
-.mandala-botao:hover{ 
-  filter: brightness(1.05); 
+.mandala-botao:hover{
+  filter: brightness(1.05);
 }
 
-.mandala-botao:active{ 
-  transform: translateY(1px); 
+.mandala-botao:active{
+  transform: translateY(1px);
 }
 
 .mandala-status{
@@ -166,8 +175,8 @@ body{
 }
 
 /* Autocomplete */
-.mandala-autocomplete{ 
-  position:relative; 
+.mandala-autocomplete{
+  position:relative;
 }
 
 .mandala-lista-sugestoes{

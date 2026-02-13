@@ -1,129 +1,126 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+
   <link rel="stylesheet" href="./assets/css/menu.css" />
   <link rel="stylesheet" href="./assets/css/mandala.css" />
-
-
 </head>
 
 <body>
 
-    <nav class="menu">
-        <div class="logo">AstroApp</div>
+  <nav class="menu">
+    <div class="logo">AstroApp</div>
 
-        <ul class="lista-menu" id="listaMenu">
-            <li  onclick="window.location.href='./home.html'">Início</li>
-            <li>Signos</li>
-            <li>Casas Astrológicas</li>
-            <li>Planetas</li>
-            <li  onclick="window.location.href='./mandala.html'">Mandala</li>
-            <li>Perfil</li>
-            <li onclick="sair()">Sair</li>
-        </ul>
+    <ul class="lista-menu" id="listaMenu">
+      <li onclick="window.location.href='./home.html'">Início</li>
+      <li>Signos</li>
+      <li>Casas Astrológicas</li>
+      <li>Planetas</li>
+      <li onclick="window.location.href='./mandala.html'">Mandala</li>
+      <li>Perfil</li>
+      <li onclick="sair()">Sair</li>
+    </ul>
 
-        <div class="botao-menu" onclick="toggleMenu()">
-            ☰
-        </div>
-    </nav>
-
-    <div class="conteudo">
-         <main class="mandala-pagina">
-    <header class="mandala-cabecalho">
-      <h1 class="mandala-titulo">Mandala Astral</h1>
-      <p class="mandala-subtitulo">Preencha os dados abaixo e gere sua mandala em SVG.</p>
-    </header>
-
-    <section class="mandala-cartao" aria-label="Formulário de geração da mandala">
-      <form id="formMandala" class="mandala-formulario" autocomplete="off">
-        <div class="mandala-campo">
-          <label for="name" class="mandala-label">Nome</label>
-          <input id="name" name="name" class="mandala-input" required placeholder="Ex: Daniel" />
-        </div>
-
-        <div class="mandala-linha-2">
-          <div class="mandala-campo">
-            <label for="date" class="mandala-label">Data de nascimento</label>
-            <input id="date" name="date" class="mandala-input" type="date" required />
-          </div>
-
-          <div class="mandala-campo">
-            <label for="time" class="mandala-label">Hora de nascimento</label>
-            <input id="time" name="time" class="mandala-input" type="time" required />
-          </div>
-        </div>
-
-        <div class="mandala-campo mandala-autocomplete">
-          <label for="city" class="mandala-label">Cidade de nascimento</label>
-          <input
-            id="city"
-            name="city"
-            class="mandala-input"
-            required
-            placeholder="Digite sua cidade..."
-            aria-autocomplete="list"
-            aria-controls="cityList"
-            aria-expanded="false"
-          />
-
-          <div id="cityList" class="mandala-lista-sugestoes" hidden></div>
-
-          <input id="lat" type="hidden" name="lat" />
-          <input id="lng" type="hidden" name="lng" />
-          <input id="tz" type="hidden" name="tz" />
-        </div>
-
-        <div class="mandala-linha-2">
-          <div class="mandala-campo">
-            <label for="house_system" class="mandala-label">Sistema de casas</label>
-            <select id="house_system" name="house_system" class="mandala-select">
-              <option value="placidus" selected>Placidus</option>
-              <option value="whole_sign">Whole Sign</option>
-              <option value="equal">Equal</option>
-              <option value="koch">Koch</option>
-              <option value="regiomontanus">Regiomontanus</option>
-              <option value="porphyry">Porphyry</option>
-              <option value="campanus">Campanus</option>
-            </select>
-          </div>
-
-          <div class="mandala-campo">
-            <label for="zodiac_type" class="mandala-label">Zodíaco</label>
-            <select id="zodiac_type" name="zodiac_type" class="mandala-select">
-              <option value="tropical" selected>Tropical</option>
-              <option value="sidereal">Sideral</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="mandala-linha-2">
-          <div class="mandala-campo">
-            <label for="theme_type" class="mandala-label">Tema</label>
-            <select id="theme_type" name="theme_type" class="mandala-select">
-              <option value="light" selected>Claro (parecido com o exemplo)</option>
-              <option value="dark">Escuro</option>
-            </select>
-          </div>
-        </div>
-
-        <button class="mandala-botao" type="submit">Gerar Mandala</button>
-        <p id="status" class="mandala-status" role="status" aria-live="polite"></p>
-      </form>
-    </section>
-
-    <section class="mandala-resultado" aria-label="Resultado da mandala">
-      <div id="output" class="mandala-caixa-svg" aria-label="Mandala gerada"></div>
-    </section>
-  </main>
-
+    <div class="botao-menu" onclick="toggleMenu()">
+      ☰
     </div>
-<script src="./assets/js/menu.js"></script>
-<script src="./assets/js/mandala.js"></script>
+  </nav>
 
+  <div class="conteudo">
+    <main class="mandala-pagina">
+      <header class="mandala-cabecalho">
+        <h1 class="mandala-titulo">Mandala Astral</h1>
+        <p class="mandala-subtitulo">Preencha os dados abaixo e gere sua mandala em SVG.</p>
+      </header>
 
+      <section class="mandala-cartao" aria-label="Formulário de geração da mandala">
+        <form id="formMandala" class="mandala-formulario" autocomplete="off">
 
+          <div class="mandala-campo">
+            <label for="name" class="mandala-label">Nome</label>
+            <input id="name" name="name" class="mandala-input" required placeholder="Ex: Daniel" />
+          </div>
+
+          <div class="mandala-linha-2">
+            <div class="mandala-campo">
+              <label for="date" class="mandala-label">Data de nascimento</label>
+              <input id="date" name="date" class="mandala-input" type="date" required />
+            </div>
+
+            <div class="mandala-campo">
+              <label for="time" class="mandala-label">Hora de nascimento</label>
+              <input id="time" name="time" class="mandala-input" type="time" required />
+            </div>
+          </div>
+
+          <div class="mandala-campo mandala-autocomplete">
+            <label for="city" class="mandala-label">Cidade de nascimento</label>
+            <input
+              id="city"
+              name="city"
+              class="mandala-input"
+              required
+              placeholder="Digite sua cidade..."
+              aria-autocomplete="list"
+              aria-controls="cityList"
+              aria-expanded="false"
+            />
+
+            <div id="cityList" class="mandala-lista-sugestoes" hidden></div>
+
+            <input id="lat" type="hidden" name="lat" />
+            <input id="lng" type="hidden" name="lng" />
+            <input id="tz" type="hidden" name="tz" />
+          </div>
+
+          <div class="mandala-linha-2">
+            <div class="mandala-campo">
+              <label for="house_system" class="mandala-label">Sistema de casas</label>
+              <select id="house_system" name="house_system" class="mandala-select">
+                <option value="placidus" selected>Placidus</option>
+                <option value="whole_sign">Whole Sign</option>
+                <option value="equal">Equal</option>
+                <option value="koch">Koch</option>
+                <option value="regiomontanus">Regiomontanus</option>
+                <option value="porphyry">Porphyry</option>
+                <option value="campanus">Campanus</option>
+              </select>
+            </div>
+
+            <div class="mandala-campo">
+              <label for="zodiac_type" class="mandala-label">Zodíaco</label>
+              <select id="zodiac_type" name="zodiac_type" class="mandala-select">
+                <option value="tropical" selected>Tropical</option>
+                <option value="sidereal">Sideral</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mandala-linha-2">
+            <div class="mandala-campo">
+              <label for="theme_type" class="mandala-label">Tema</label>
+              <select id="theme_type" name="theme_type" class="mandala-select">
+                <option value="light" selected>Claro (parecido com o exemplo)</option>
+                <option value="dark">Escuro</option>
+              </select>
+            </div>
+          </div>
+
+          <button class="mandala-botao" type="submit">Gerar Mandala</button>
+          <p id="status" class="mandala-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="mandala-resultado" aria-label="Resultado da mandala">
+        <div id="output" class="mandala-caixa-svg" aria-label="Mandala gerada"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="./assets/js/menu.js"></script>
+  <script src="./assets/js/mandala.js"></script>
 </body>
 </html>
