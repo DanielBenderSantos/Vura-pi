@@ -10,9 +10,7 @@
   --grad-2:#ffa58d;
 }
 
-*{
-  box-sizing:border-box;
-}
+*{ box-sizing:border-box; }
 
 body{
   margin:0;
@@ -32,19 +30,9 @@ body{
 }
 
 /* Cabeçalho */
-.mandala-cabecalho{
-  margin-bottom:14px;
-}
-
-.mandala-titulo{
-  margin:0;
-  font-size:32px;
-}
-
-.mandala-subtitulo{
-  margin:6px 0 0;
-  color:var(--texto-suave);
-}
+.mandala-cabecalho{ margin-bottom:14px; }
+.mandala-titulo{ margin:0; font-size:32px; }
+.mandala-subtitulo{ margin:6px 0 0; color:var(--texto-suave); }
 
 /* Cartão */
 .mandala-cartao{
@@ -107,11 +95,19 @@ body{
   padding:20px;
 
   display:flex;
+  flex-direction:column;
+  gap:14px;
+
+  overflow:auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Área que recebe o SVG */
+.mandala-svg-area{
+  display:flex;
   justify-content:center;
   align-items:center;
-
-  overflow:auto; /* scroll real */
-  -webkit-overflow-scrolling: touch;
+  min-height: 200px;
 }
 
 /* Wrapper cresce de verdade (zoom via width) */
@@ -131,6 +127,36 @@ body{
   background:#fff;
 }
 
+/* Controles */
+.mandala-controles{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+  justify-content:center;
+}
+
+.mandala-btn{
+  padding:10px 14px;
+  border-radius:12px;
+  border:1px solid var(--borda);
+  background:rgba(17,26,46,.55);
+  color:var(--texto);
+  cursor:pointer;
+  font-weight:700;
+}
+
+.mandala-btn:active{
+  transform: translateY(1px);
+}
+
+.mandala-zoom-label{
+  color:var(--texto-suave);
+  font-size:13px;
+  min-width: 70px;
+  text-align:center;
+}
+
 /* Layout em 2 colunas */
 .mandala-linha-2{
   display:grid;
@@ -139,12 +165,10 @@ body{
 }
 
 @media (max-width:720px){
-  .mandala-linha-2{
-    grid-template-columns:1fr;
-  }
+  .mandala-linha-2{ grid-template-columns:1fr; }
 }
 
-/* Botão */
+/* Botão principal */
 .mandala-botao{
   margin-top:6px;
   padding:11px 14px;
@@ -159,13 +183,8 @@ body{
   transition: transform .06s ease, filter .15s ease;
 }
 
-.mandala-botao:hover{
-  filter: brightness(1.05);
-}
-
-.mandala-botao:active{
-  transform: translateY(1px);
-}
+.mandala-botao:hover{ filter: brightness(1.05); }
+.mandala-botao:active{ transform: translateY(1px); }
 
 .mandala-status{
   min-height:18px;
@@ -175,9 +194,7 @@ body{
 }
 
 /* Autocomplete */
-.mandala-autocomplete{
-  position:relative;
-}
+.mandala-autocomplete{ position:relative; }
 
 .mandala-lista-sugestoes{
   position:absolute;
