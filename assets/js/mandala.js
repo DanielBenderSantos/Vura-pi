@@ -15,8 +15,8 @@ const listaCidades = pegarEl("cityList");
 let cidadeSelecionada = null;
 let zoomAtual = 1;
 
-// controla resolução do PNG (2, 3, 4...)
-let qualidadePNG = 3; // ✅ 3x fica bem nítido
+// ✅ qualidade fixa
+const QUALIDADE_PNG = 3;
 
 // guarda o size usado na API (pra exportar com a mesma base)
 let ultimoSize = 900;
@@ -38,7 +38,6 @@ function escaparHtml(texto) {
 }
 
 function garantirXmlns(svgString) {
-  // garante xmlns pro navegador rasterizar corretamente
   if (!/xmlns=/.test(svgString)) {
     return svgString.replace("<svg", '<svg xmlns="http://www.w3.org/2000/svg"');
   }
@@ -46,7 +45,6 @@ function garantirXmlns(svgString) {
 }
 
 function obterDimensoesDoSVG(svgEl) {
-  // tenta pegar do viewBox
   const vb = svgEl.getAttribute("viewBox");
   if (vb) {
     const parts = vb.trim().split(/\s+|,/).map(Number);
@@ -54,7 +52,6 @@ function obterDimensoesDoSVG(svgEl) {
       return { w: parts[2], h: parts[3] };
     }
   }
-  // fallback: assume quadrado do size usado
   return { w: ultimoSize, h: ultimoSize };
 }
 
@@ -198,27 +195,16 @@ formulario.addEventListener("submit", async (e) => {
 
     if (!svg) throw new Error("SVG não encontrado na resposta.");
 
-    // UI com área do SVG + controles de zoom + download + qualidade
+    // ✅ só SVG + botão de baixar
     elResultado.innerHTML = `
       <div class="mandala-svg-area">
         <div id="svgWrapper">${svg}</div>
       </div>
 
-      <div class="mandala-controles">
-        <button class="mandala-btn" id="zoomMenos" type="button">−</button>
-        <div class="mandala-zoom-label" id="zoomLabel">100%</div>
-        <button class="mandala-btn" id="zoomMais" type="button">+</button>
-        <button class="mandala-btn" id="zoomReset" type="button">Reset</button>
-
-        <span style="width:12px; display:inline-block;"></span>
-
-        <button class="mandala-btn" id="btnDownload" type="button">📥 Baixar PNG (HD)</button>
-
-        <select class="mandala-btn" id="qualidadeSelect" title="Qualidade do PNG" style="padding:10px 12px;">
-          <option value="2">Qualidade 2x</option>
-          <option value="3" selected>Qualidade 3x</option>
-          <option value="4">Qualidade 4x</option>
-        </select>
+      <div class="mandala-download-wrap">
+        <button class="mandala-btn" id="btnDownload" type="button">
+          📥 Baixar PNG (HD 3x)
+        </button>
       </div>
     `;
 
@@ -241,92 +227,51 @@ formulario.addEventListener("submit", async (e) => {
       svgEl.style.display = "block";
     }
 
-    ativarZoom();
+    ativarZoomWheel();
     ativarDownload();
 
-    definirStatus("Pronto ✅ (use o scroll do mouse ou botões + / −)");
+    definirStatus("Pronto ✅ (use o scroll do mouse pra dar zoom)");
   } catch (erro) {
     definirStatus(erro.message);
   }
 });
 
-// ================= ZOOM (FUNCIONA SEMPRE) =================
-function atualizarLabelZoom() {
-  const label = pegarEl("zoomLabel");
-  if (!label) return;
-  label.textContent = `${Math.round(zoomAtual * 100)}%`;
-}
-
+// ================= ZOOM (APENAS WHEEL) =================
 function aplicarZoom() {
   const wrapper = pegarEl("svgWrapper");
   if (!wrapper) return;
 
   wrapper.style.width = `${zoomAtual * 100}%`;
   wrapper.style.minWidth = "100%";
-  atualizarLabelZoom();
 }
 
-function ativarZoom() {
+function ativarZoomWheel() {
   const wrapper = pegarEl("svgWrapper");
   if (!wrapper) return;
 
   zoomAtual = 1;
   aplicarZoom();
 
-  const btnMais = pegarEl("zoomMais");
-  const btnMenos = pegarEl("zoomMenos");
-  const btnReset = pegarEl("zoomReset");
-
-  if (btnMais) {
-    btnMais.onclick = () => {
-      zoomAtual = Math.min(3, zoomAtual + 0.15);
-      aplicarZoom();
-    };
-  }
-
-  if (btnMenos) {
-    btnMenos.onclick = () => {
-      zoomAtual = Math.max(1, zoomAtual - 0.15);
-      aplicarZoom();
-    };
-  }
-
-  if (btnReset) {
-    btnReset.onclick = () => {
-      zoomAtual = 1;
-      aplicarZoom();
-    };
-  }
-
-  // ✅ Wheel no container inteiro (#output), mais confiável
+  // Wheel no container (#output) é mais confiável
   const wheelHandler = (e) => {
-    // se o usuário estiver só scrollando (sem intenção de zoom), você pode exigir CTRL:
-    // if (!e.ctrlKey) return;
-
     e.preventDefault();
 
     zoomAtual += e.deltaY * -0.0012;
     zoomAtual = Math.min(Math.max(1, zoomAtual), 3);
+
     aplicarZoom();
   };
 
-  // Remove handlers antigos (se regenerar várias vezes)
+  // Evita acumular múltiplos listeners se gerar várias vezes
   elResultado.onwheel = null;
   elResultado.addEventListener("wheel", wheelHandler, { passive: false });
 }
 
-// ================= DOWNLOAD PNG (ALTA RESOLUÇÃO) =================
+// ================= DOWNLOAD PNG (HD FIXO 3x) =================
 function ativarDownload() {
   const btn = pegarEl("btnDownload");
   const svgEl = elResultado.querySelector("svg");
-  const qualidadeEl = pegarEl("qualidadeSelect");
   if (!btn || !svgEl) return;
-
-  if (qualidadeEl) {
-    qualidadeEl.onchange = () => {
-      qualidadePNG = Number(qualidadeEl.value) || 3;
-    };
-  }
 
   btn.addEventListener("click", async () => {
     try {
@@ -336,9 +281,8 @@ function ativarDownload() {
 
       const { w, h } = obterDimensoesDoSVG(svgEl);
 
-      // Base export: usa w/h do SVG e multiplica pela qualidade
-      const exportW = Math.round(w * qualidadePNG);
-      const exportH = Math.round(h * qualidadePNG);
+      const exportW = Math.round(w * QUALIDADE_PNG);
+      const exportH = Math.round(h * QUALIDADE_PNG);
 
       const canvas = document.createElement("canvas");
       canvas.width = exportW;
@@ -346,7 +290,7 @@ function ativarDownload() {
 
       const ctx = canvas.getContext("2d");
 
-      // Fundo branco (se quiser transparente, remova essas 2 linhas)
+      // Fundo branco
       ctx.fillStyle = "#ffffff";
       ctx.fillRect(0, 0, exportW, exportH);
 
@@ -356,7 +300,6 @@ function ativarDownload() {
       const url = URL.createObjectURL(blob);
 
       img.onload = () => {
-        // desenha na resolução alta
         ctx.drawImage(img, 0, 0, exportW, exportH);
         URL.revokeObjectURL(url);
 
@@ -370,7 +313,7 @@ function ativarDownload() {
 
       img.onerror = () => {
         URL.revokeObjectURL(url);
-        definirStatus("Falha ao converter SVG para PNG (verifique se o SVG tem fontes/externos).");
+        definirStatus("Falha ao converter SVG para PNG.");
       };
 
       img.src = url;

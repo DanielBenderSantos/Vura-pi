@@ -102,7 +102,7 @@ body{
   -webkit-overflow-scrolling: touch;
 }
 
-/* Área que recebe o SVG */
+/* Área do SVG */
 .mandala-svg-area{
   display:flex;
   justify-content:center;
@@ -127,34 +127,24 @@ body{
   background:#fff;
 }
 
-/* Controles */
-.mandala-controles{
+/* Botão de download */
+.mandala-download-wrap{
   display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  align-items:center;
   justify-content:center;
 }
 
 .mandala-btn{
-  padding:10px 14px;
+  padding:10px 16px;
   border-radius:12px;
   border:1px solid var(--borda);
   background:rgba(17,26,46,.55);
   color:var(--texto);
   cursor:pointer;
-  font-weight:700;
+  font-weight:800;
 }
 
 .mandala-btn:active{
   transform: translateY(1px);
-}
-
-.mandala-zoom-label{
-  color:var(--texto-suave);
-  font-size:13px;
-  min-width: 70px;
-  text-align:center;
 }
 
 /* Layout em 2 colunas */
