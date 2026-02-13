@@ -217,6 +217,8 @@ function ativarZoom() {
 
   zoomAtual = 1;
 
+  wrapper.style.transformOrigin = "center center";
+
   wrapper.addEventListener("wheel", (e) => {
     e.preventDefault();
 

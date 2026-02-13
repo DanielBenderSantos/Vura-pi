@@ -100,7 +100,7 @@ body{
 
 .mandala-caixa-svg{
   width:100%;
-  max-width:750px; /* espaço maior para a mandala */
+  max-width:900px;
   border:1px solid var(--borda);
   border-radius:20px;
   background:rgba(0,0,0,.25);
@@ -110,8 +110,7 @@ body{
   justify-content:center;
   align-items:center;
 
-  overflow:visible; /* evita corte */
-  transition: all .3s ease;
+  overflow:auto; /* 🔥 ESSA LINHA RESOLVE O CORTE NO ZOOM */
 }
 
 .mandala-caixa-svg svg{
