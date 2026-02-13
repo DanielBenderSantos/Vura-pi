@@ -67,6 +67,7 @@ body {
 
     .lista-menu.ativo {
         display: flex;
+        z-index: 2;
     }
 
     .botao-menu {
