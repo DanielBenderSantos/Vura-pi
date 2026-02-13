@@ -83,7 +83,7 @@ inputCidade.addEventListener("input", () => {
 
   timerDebounce = setTimeout(async () => {
     try {
-      const resp = await fetch(`${API_BASE}/api/api-geo?q=${encodeURIComponent(termo)}&limit=8`);
+      const resp = await fetch(`${API_BASE}/assets/api/api-geo?q=${encodeURIComponent(termo)}&limit=8`);
       const dados = await resp.json();
 
       if (!resp.ok) {
@@ -149,7 +149,7 @@ formulario.addEventListener("submit", async (e) => {
     definirStatus("Gerando mandala...");
     elResultado.innerHTML = "";
 
-    const resp = await fetch(`${API_BASE}/api/api-mandala`, {
+    const resp = await fetch(`${API_BASE}/assets/api/api-mandala`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
