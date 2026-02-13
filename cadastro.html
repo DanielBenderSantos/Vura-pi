@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro</title>
+  <link rel="stylesheet" href="./assets/css/cadastro.css" />
+   
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Criar Conta</h2>
+
+        <form id="formularioCadastro">
+
+            <div class="campo">
+                <label for="nome">Nome</label>
+                <input type="text" id="nome" required>
+            </div>
+
+            <div class="campo">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+
+            <div class="campo">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" required>
+            </div>
+
+            <div class="campo">
+                <label for="confirmarSenha">Confirmar Senha</label>
+                <input type="password" id="confirmarSenha" required>
+            </div>
+
+            <div class="campo">
+                <label for="dataNascimento">Data de Nascimento</label>
+                <input type="date" id="dataNascimento" required>
+            </div>
+
+            <div class="campo">
+                <label for="horaNascimento">Hora de Nascimento</label>
+                <input type="time" id="horaNascimento" required>
+            </div>
+
+            <div class="campo">
+                <label for="cidadeNatal">Cidade Natal</label>
+                <input type="text" id="cidadeNatal" required>
+            </div>
+
+            <button type="submit" class="botao">
+                Criar Conta
+            </button>
+
+        </form>
+
+        <div class="link-login" onclick="voltarLogin()">
+            Já tem conta? Entrar
+        </div>
+    </div>
+
+ 
+<script src="./assets/js/cadastro.js"></script>
+
+</body>
+</html>
