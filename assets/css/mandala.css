@@ -10,7 +10,9 @@
   --grad-2:#ffa58d;
 }
 
-*{ box-sizing:border-box; }
+*{ 
+  box-sizing:border-box; 
+}
 
 body{
   margin:0;
@@ -30,9 +32,19 @@ body{
 }
 
 /* Cabeçalho */
-.mandala-cabecalho{ margin-bottom:14px; }
-.mandala-titulo{ margin:0; font-size:32px; }
-.mandala-subtitulo{ margin:6px 0 0; color:var(--texto-suave); }
+.mandala-cabecalho{ 
+  margin-bottom:14px; 
+}
+
+.mandala-titulo{ 
+  margin:0; 
+  font-size:32px; 
+}
+
+.mandala-subtitulo{ 
+  margin:6px 0 0; 
+  color:var(--texto-suave); 
+}
 
 /* Cartão */
 .mandala-cartao{
@@ -88,22 +100,24 @@ body{
 
 .mandala-caixa-svg{
   width:100%;
-  max-width:650px; /* controla tamanho máximo */
+  max-width:750px; /* espaço maior para a mandala */
   border:1px solid var(--borda);
   border-radius:20px;
   background:rgba(0,0,0,.25);
-  padding:24px;
+  padding:20px;
+
   display:flex;
   justify-content:center;
   align-items:center;
-  min-height:220px;
+
+  overflow:visible; /* evita corte */
   transition: all .3s ease;
 }
 
 .mandala-caixa-svg svg{
   width:100%;
   height:auto;
-  max-width:600px; /* limite real da mandala */
+  max-width:100%;
   display:block;
   border-radius:14px;
   background:#fff;
@@ -117,7 +131,9 @@ body{
 }
 
 @media (max-width:720px){
-  .mandala-linha-2{ grid-template-columns:1fr; }
+  .mandala-linha-2{ 
+    grid-template-columns:1fr; 
+  }
 }
 
 /* Botão */
@@ -135,8 +151,13 @@ body{
   transition: transform .06s ease, filter .15s ease;
 }
 
-.mandala-botao:hover{ filter: brightness(1.05); }
-.mandala-botao:active{ transform: translateY(1px); }
+.mandala-botao:hover{ 
+  filter: brightness(1.05); 
+}
+
+.mandala-botao:active{ 
+  transform: translateY(1px); 
+}
 
 .mandala-status{
   min-height:18px;
@@ -145,9 +166,10 @@ body{
   color:var(--texto-suave);
 }
 
-
 /* Autocomplete */
-.mandala-autocomplete{ position:relative; }
+.mandala-autocomplete{ 
+  position:relative; 
+}
 
 .mandala-lista-sugestoes{
   position:absolute;
