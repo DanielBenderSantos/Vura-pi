@@ -187,9 +187,9 @@ formulario.addEventListener("submit", async (e) => {
     
     // 👇 MOSTRA O JSON COMPLETO NO CONSOLE
     console.log("Resposta da API:", dados);
-    console.log(data.planets); // posição de todos planetas
-console.log(data.angles.asc); // ascendente
-console.log(data.houses); // casas
+    console.log(dados.planets); // posição de todos planetas
+console.log(dados.angles.asc); // ascendente
+console.log(dados.houses); // casas
 
 
     if (!resp.ok) throw new Error(dados?.error || "Falha ao gerar mandala.");
