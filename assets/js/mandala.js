@@ -184,6 +184,9 @@ formulario.addEventListener("submit", async (e) => {
     });
 
     const dados = await resp.json();
+    
+    // 👇 MOSTRA O JSON COMPLETO NO CONSOLE
+    console.log("Resposta da API:", dados);
     if (!resp.ok) throw new Error(dados?.error || "Falha ao gerar mandala.");
 
     const svg =

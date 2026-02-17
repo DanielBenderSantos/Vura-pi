@@ -1,7 +1,7 @@
-const token = localStorage.getItem("token");
-if (!token) {
-  window.location.href = "index.html";
-}
+// const token = localStorage.getItem("token");
+// if (!token) {
+//   window.location.href = "index.html";
+// }
 
 function toggleMenu() {
     const menu = document.getElementById("listaMenu");
