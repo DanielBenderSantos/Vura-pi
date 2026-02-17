@@ -100,7 +100,7 @@ formulario.addEventListener("submit", async (e) => {
     lat:    cidadeSelecionada.lat,
     lng:    cidadeSelecionada.lng,
     tz_str: cidadeSelecionada.timezone,
-    // valores fixos (removidos do formulário)
+    // valores fixos
     house_system: "placidus",
     zodiac_type:  "tropical",
     theme_type:   "light",
@@ -111,23 +111,34 @@ formulario.addEventListener("submit", async (e) => {
     definirStatus("Gerando mandala...");
     elResultado.innerHTML = `<div style="color:#a9b6d3; font-size:14px;">🔄 Gerando visual...</div>`;
 
-    const resp  = await fetch(`${API_BASE}/api/api-mandala`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+    // Faz as duas chamadas ao mesmo tempo
+    const [respostaSvg, respostaNatal] = await Promise.all([
+      fetch(`${API_BASE}/api/api-mandala`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      }),
+      fetch(`${API_BASE}/api/api-natal`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+    ]);
 
-    const dados = await resp.json();
-    console.log("Resposta da API:", dados);
+    const dadosSvg   = await respostaSvg.json();
+    const dadosNatal = await respostaNatal.json();
 
-    if (!resp.ok) throw new Error(dados?.error || "Falha ao gerar mandala.");
+    console.log("SVG:", dadosSvg);
+    console.log("Natal:", dadosNatal);
 
-    const svg = dados.svg || dados.chart_svg || dados.output_svg || dados?.result?.svg || dados?.data?.svg;
+    if (!respostaSvg.ok) throw new Error(dadosSvg?.error || "Falha ao gerar mandala.");
+
+    const svg = dadosSvg.svg || dadosSvg.chart_svg || dadosSvg.output_svg || dadosSvg?.result?.svg || dadosSvg?.data?.svg;
     if (!svg) throw new Error("SVG não encontrado na resposta.");
 
+    // Monta o SVG
     elResultado.innerHTML = `<div id="svgWrapper">${svg}</div>`;
 
-    // Deixa o SVG responsivo
     const svgEl = elResultado.querySelector("svg");
     if (svgEl) {
       const w = svgEl.getAttribute("width");
@@ -139,8 +150,68 @@ formulario.addEventListener("submit", async (e) => {
       svgEl.style.cssText = "width:100%; height:auto; display:block;";
     }
 
+    // Monta os cards de interpretação (se vieram)
+    if (respostaNatal.ok && dadosNatal?.interpretation?.sections) {
+      elResultado.appendChild(montarCards(dadosNatal.interpretation.sections));
+    }
+
     definirStatus("Pronto ✅");
   } catch (erro) {
     definirStatus(erro.message);
   }
 });
+
+// ================= CARDS DE INTERPRETAÇÃO =================
+
+// Nomes legíveis para cada seção
+const nomesSecoes = {
+  core_self:          "Core Self",
+  mind:               "Mind & Communication",
+  love_relating:      "Love & Relationships",
+  work_path:          "Work & Life Path",
+  social_collective:  "Social & Collective",
+  karmic_healing:     "Karmic & Healing",
+  aspects:            "Aspects",
+};
+
+function montarCards(secoes) {
+  const container = document.createElement("div");
+  container.className = "interpretacao-container";
+
+  for (const [chave, itens] of Object.entries(secoes)) {
+    if (!itens || itens.length === 0) continue;
+
+    const secao = document.createElement("div");
+    secao.className = "interpretacao-secao";
+
+    const titulo = document.createElement("h2");
+    titulo.className = "interpretacao-titulo";
+    titulo.textContent = nomesSecoes[chave] || chave;
+    secao.appendChild(titulo);
+
+    const grid = document.createElement("div");
+    grid.className = "interpretacao-grid";
+
+    itens.forEach((item) => {
+      const card = document.createElement("div");
+      card.className = "interpretacao-card";
+
+      const tituloCard = document.createElement("h3");
+      tituloCard.className = "interpretacao-card-titulo";
+      tituloCard.textContent = item.title || item.key || "";
+
+      const corpo = document.createElement("p");
+      corpo.className = "interpretacao-card-corpo";
+      corpo.textContent = item.body || item.content || "";
+
+      card.appendChild(tituloCard);
+      card.appendChild(corpo);
+      grid.appendChild(card);
+    });
+
+    secao.appendChild(grid);
+    container.appendChild(secao);
+  }
+
+  return container;
+}

@@ -213,3 +213,55 @@ body{
 .mandala-lista-sugestoes button:hover{
   background:rgba(255,255,255,.06);
 }
+
+
+/* ========== INTERPRETAÇÕES ========== */
+
+.interpretacao-container {
+  margin-top: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.interpretacao-secao {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.interpretacao-titulo {
+  font-size: 18px;
+  font-weight: 600;
+  color: #c9d6f0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 8px;
+}
+
+.interpretacao-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.interpretacao-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.interpretacao-card-titulo {
+  font-size: 15px;
+  font-weight: 600;
+  color: #e2e8f8;
+}
+
+.interpretacao-card-corpo {
+  font-size: 14px;
+  line-height: 1.65;
+  color: #a9b6d3;
+}
