@@ -88,6 +88,7 @@ export default async function handler(req, res) {
         body: JSON.stringify(payload)
       }
     );
+    console.log ("tudo aqui= " + resposta)
 
     if (!resposta.ok) {
       const textoErro = await resposta.text();
