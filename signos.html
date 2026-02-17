@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signos - Personalidade</title>
+
+  <link rel="stylesheet" href="./assets/css/menu.css" />
+  <link rel="stylesheet" href="./assets/css/signos.css" />
+</head>
+
+<body>
+
+  <nav class="menu">
+    <div class="logo">AstroApp</div>
+
+    <ul class="lista-menu" id="listaMenu">
+      <li onclick="window.location.href='./home.html'">Início</li>
+      <li onclick="window.location.href='./signos.html'">Signos</li>
+      <li>Casas Astrológicas</li>
+      <li>Planetas</li>
+      <li onclick="window.location.href='./mandala.html'">Mandala</li>
+      <li onclick="window.location.href='./perfil.html'">Perfil</li>
+      <li onclick="sair()">Sair</li>
+    </ul>
+
+    <div class="botao-menu" onclick="toggleMenu()">☰</div>
+  </nav>
+
+  <main class="conteudo-signos">
+    <header class="topo-signos">
+      <h1>Personalidade dos Signos</h1>
+      <p>Pesquise um signo para ver apenas o resultado. Se deixar vazio, mostra todos.</p>
+
+      <div class="barra-pesquisa">
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Ex: Virgem, Aries, Escorpião..."
+          autocomplete="off"
+        />
+        <button id="btnLimpar" type="button">Limpar</button>
+      </div>
+    </header>
+
+    <section id="gridSignos" class="grid-signos"></section>
+
+    <div id="emptyState" class="empty-state" style="display:none;">
+      <h2>Nenhum signo encontrado</h2>
+      <p>Tente pesquisar por outro nome (ex: "leao", "cancer", "touro").</p>
+    </div>
+  </main>
+
+  <script src="./assets/js/menu.js"></script>
+  <script src="./assets/js/signos.js"></script>
+</body>
+</html>

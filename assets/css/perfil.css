@@ -1,0 +1,206 @@
+/* RESET BÁSICO (não mexe no menu.css, só melhora consistência da página) */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: black; /* seu tema */
+  min-height: 100vh;
+  color: #fff;
+}
+
+/* WRAP PRINCIPAL */
+.perfil-wrap {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+/* TOPO */
+.perfil-topo {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.perfil-topo h1 {
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+.perfil-topo p {
+  color: #cfcfcf;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* CARD */
+.perfil-card {
+  background: rgba(17, 17, 17, 0.85); /* #111 com transparência */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 22px;
+  border-radius: 14px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.45);
+}
+
+/* STATUS */
+.perfil-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.badge {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  color: #eee;
+  white-space: nowrap;
+}
+
+.status-msg {
+  font-size: 14px;
+  color: #cfcfcf;
+}
+
+/* FORM */
+.perfil-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.linha {
+  display: flex;
+  flex-direction: column;
+}
+
+.linha label {
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: #ddd;
+}
+
+.linha input {
+  padding: 12px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  outline: none;
+  background: rgba(255, 255, 255, 0.06);
+  color: white;
+  transition: 0.25s;
+}
+
+.linha input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.linha input:focus {
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.10);
+}
+
+/* INPUT COM OLHO */
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrap input {
+  width: 100%;
+  padding-right: 46px;
+}
+
+/* botão olho simples (não quebra layout) */
+.btn-eye {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #cfcfcf;
+  font-size: 16px;
+  transition: 0.2s;
+  padding: 4px 6px;
+  line-height: 1;
+}
+
+.btn-eye:hover {
+  color: #fff;
+}
+
+/* DIVISOR */
+.divisor {
+  border: none;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 8px 0;
+}
+
+/* SUBTÍTULO */
+.subtitulo {
+  font-size: 15px;
+  color: #e6e6e6;
+  margin-bottom: 2px;
+}
+
+/* AÇÕES */
+.acoes {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.acoes button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.25s;
+}
+
+/* botão principal no seu tema (sem gradiente exagerado) */
+.acoes button[type="submit"] {
+  background: #151515;
+  color: white;
+}
+
+.acoes button[type="submit"]:hover {
+  background: #1f1f1f;
+}
+
+.secundario {
+  background: transparent;
+  color: #ddd;
+}
+
+.secundario:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* RESPONSIVO */
+@media (max-width: 600px) {
+  .perfil-wrap {
+    margin: 18px;
+  }
+
+  .perfil-card {
+    padding: 18px;
+  }
+
+  .acoes {
+    flex-direction: column;
+  }
+}

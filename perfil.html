@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfil</title>
+
+  <link rel="stylesheet" href="./assets/css/menu.css" />
+  <link rel="stylesheet" href="./assets/css/perfil.css" />
+</head>
+
+<body>
+  <nav class="menu">
+    <div class="logo">AstroApp</div>
+
+    <ul class="lista-menu" id="listaMenu">
+      <li onclick="window.location.href='./home.html'">Início</li>
+      <li onclick="window.location.href='./signos.html'">Signos</li>
+      <li>Casas Astrológicas</li>
+      <li>Planetas</li>
+      <li onclick="window.location.href='./mandala.html'">Mandala</li>
+      <li onclick="window.location.href='./perfil.html'">Perfil</li>
+      <li onclick="sair()">Sair</li>
+    </ul>
+
+    <div class="botao-menu" onclick="toggleMenu()">☰</div>
+  </nav>
+
+  <main class="perfil-wrap">
+    <header class="perfil-topo">
+      <h1>Meu Perfil</h1>
+      <p>Edite seu nome/email e, se quiser, troque sua senha.</p>
+    </header>
+
+    <section class="perfil-card">
+
+      <div class="perfil-status">
+        <span id="statusBadge" class="badge">Info</span>
+        <span id="statusMsg" class="status-msg">Carregando...</span>
+      </div>
+
+      <form id="perfilForm" class="perfil-form">
+
+        <div class="linha">
+          <label for="nome">Nome</label>
+          <input id="nome" type="text" required />
+        </div>
+
+        <div class="linha">
+          <label for="email">Email</label>
+          <input id="email" type="email" required />
+        </div>
+
+        <hr class="divisor" />
+
+        <h2 class="subtitulo">Trocar senha (opcional)</h2>
+
+        <!-- SENHA ATUAL -->
+        <div class="linha">
+          <label for="senhaAtual">Senha atual</label>
+          <div class="input-wrap">
+            <input id="senhaAtual" type="password" />
+            <button type="button" class="btn-eye" data-target="senhaAtual">👁</button>
+          </div>
+        </div>
+
+        <!-- NOVA SENHA -->
+        <div class="linha">
+          <label for="novaSenha">Nova senha</label>
+          <div class="input-wrap">
+            <input id="novaSenha" type="password" />
+            <button type="button" class="btn-eye" data-target="novaSenha">👁</button>
+          </div>
+        </div>
+
+        <!-- CONFIRMAR SENHA -->
+        <div class="linha">
+          <label for="confirmarNovaSenha">Confirmar nova senha</label>
+          <div class="input-wrap">
+            <input id="confirmarNovaSenha" type="password" />
+            <button type="button" class="btn-eye" data-target="confirmarNovaSenha">👁</button>
+          </div>
+        </div>
+
+        <div class="acoes">
+          <button type="submit">Salvar alterações</button>
+          <button type="button" class="secundario" id="btnCancelar">Cancelar</button>
+        </div>
+
+      </form>
+    </section>
+  </main>
+
+  <script src="./assets/js/menu.js"></script>
+  <script src="./assets/js/perfil.js"></script>
+</body>
+</html>
