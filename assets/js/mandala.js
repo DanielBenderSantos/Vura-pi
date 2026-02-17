@@ -3,10 +3,10 @@ const API_BASE = "https://vura-pi.vercel.app";
 
 const pegarEl = (id) => document.getElementById(id);
 
-const formulario  = pegarEl("formMandala");
-const elStatus    = pegarEl("status");
-const elResultado = pegarEl("output");
-const inputCidade = pegarEl("city");
+const formulario   = pegarEl("formMandala");
+const elStatus     = pegarEl("status");
+const elResultado  = pegarEl("output");
+const inputCidade  = pegarEl("city");
 const listaCidades = pegarEl("cityList");
 
 let cidadeSelecionada = null;
@@ -90,16 +90,20 @@ formulario.addEventListener("submit", async (e) => {
   const [hora, minuto]  = valorHora.split(":").map(Number);
 
   const payload = {
-    name:         pegarEl("name").value.trim(),
-    year: ano, month: mes, day: dia,
-    hour: hora, minute: minuto,
-    city:         cidadeSelecionada.name,
-    lat:          cidadeSelecionada.lat,
-    lng:          cidadeSelecionada.lng,
-    tz_str:       cidadeSelecionada.timezone,
-    house_system: pegarEl("house_system").value,
-    zodiac_type:  pegarEl("zodiac_type").value,
-    theme_type:   pegarEl("theme_type").value,
+    name:   pegarEl("name").value.trim(),
+    year:   ano,
+    month:  mes,
+    day:    dia,
+    hour:   hora,
+    minute: minuto,
+    city:   cidadeSelecionada.name,
+    lat:    cidadeSelecionada.lat,
+    lng:    cidadeSelecionada.lng,
+    tz_str: cidadeSelecionada.timezone,
+    // valores fixos (removidos do formulário)
+    house_system: "placidus",
+    zodiac_type:  "tropical",
+    theme_type:   "light",
     size: 900,
   };
 
